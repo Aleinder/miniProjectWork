@@ -20,43 +20,45 @@ public class DipendenteService {
     UtenteDB uDB;
 
     DipendenteEntity dipente;
+    public List<DipendenteEntity> getDipendenti(){
+		return dipDB.findAll();
+	}
 
-    public List<DipendenteEntity> getImpiegatiByNome(){
-        if(dipente.getUtente_id().getRuolo().equals("supervisore")){
-            return dipDB.findImpiegatoByNome();
+    public List<DipendenteEntity> getDipendentiByNome(String nome){
+        if(dipente.getUtente().getRuolo().equals("supervisore")){
+            return dipDB.findAllByOrderByNome();
         }
 
         return null;
         
     }
 
-    public List<DipendenteEntity> getImpiegatiByCognome(){
-        if(dipente.getUtente_id().getRuolo().equals("supervisore")){
-            return dipDB.findImpiegatoByCognome();
+    public List<DipendenteEntity> getDipendentiByCognome(String cognome){
+        if(dipente.getUtente().getRuolo().equals("supervisore")){
+            return dipDB.findAllByOrderByCognome();
         }
         return null;
     }
 
-    public List<DipendenteEntity> getImpiegatiBySettore(){
-        if(dipente.getUtente_id().getRuolo().equals("supervisore")){
-            return dipDB.findImpiegatoBySettore();
+
+    public List<DipendenteEntity> getDipendentiByStipendio(double min,double max){
+        if(dipente.getUtente().getRuolo().equals("supervisore")){
+            return dipDB.findByStipendioBetween(min,max);
         }
         
 
         return null;
     }
 
-    public List<DipendenteEntity> getImpiegatiByStipendio(double min,double max){
-        if(dipente.getUtente_id().getRuolo().equals("supervisore")){
-            return dipDB.findImpiegatoByStipendioBetween(min,max);
+    public List<DipendenteEntity> getDipendentiByRuolo(int rif_to){
+        if(dipente.getUtente().getRuolo().equals("supervisore")){
+            return dipDB.findByRuolo(rif_to);
         }
-        
-
         return null;
     }
 
     public DipendenteEntity addImpiegato(UtenteEntity utente , DipendenteEntity impiegato){
-        if(dipente.getUtente_id().getRuolo().equals("supervisore")){
+        if(dipente.getUtente().getRuolo().equals("supervisore")){
             uDB.save(utente);
           return dipDB.save(impiegato);
         }
@@ -65,10 +67,11 @@ public class DipendenteService {
     }
 
     public DipendenteEntity editImpiegato(DipendenteEntity impiegato){
-        if(dipente.getUtente_id().getRuolo().equals("supervisore")){
+        if(dipente.getUtente().getRuolo().equals("supervisore")){
           return dipDB.save(impiegato);
         }
         return null;
             
     }
 }
+

@@ -17,38 +17,47 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import it.es.gestionale.model.DipendenteEntity;
 import it.es.gestionale.model.UtenteEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+import it.es.gestionale.model.DipendenteEntity;
 import it.es.gestionale.service.DipendenteService;
 
 @RestController
 @RequestMapping("/api/dipendente")
-@SessionAttributes("utente_logged")
 public class DipendenteREST {
-   
-    @Autowired
-    DipendenteService service;
-
-    @GetMapping("/nome")
-    public List<DipendenteEntity> getImpiegatiByNome(){
-        return service.getImpiegatiByNome();
-    }
-
-    @GetMapping("/cognome")
-    public List<DipendenteEntity> getImpiegatiByCognome(){
-        return service.getImpiegatiByCognome();
-    }
-
-    @GetMapping("/settore")
-    public List<DipendenteEntity> getImpiegatiBySettore(){
-        return service.getImpiegatiBySettore();
-    }
-
-    @GetMapping("/stipendio/range/{min}/{max}")
-    public List<DipendenteEntity> getImpiegatiByStipendio(@PathVariable double min,@PathVariable double max){
-        return service.getImpiegatiByStipendio(min,max);
-    }
-
-
-
+	
+	@Autowired
+	private DipendenteService dServ;
+	
+	@GetMapping("/nome/{nome}")
+	public List<DipendenteEntity> getClientiByNome(@PathVariable("nome")String nome){
+		
+		return dServ.getDipendentiByNome(nome);
+	}
+	
+	@GetMapping("/cognome/{cognome}")
+	public List<DipendenteEntity> getClientiByCognome(@PathVariable("cognome")String cognome){
+		
+		return dServ.getDipendentiByCognome(cognome);
+	}
+	
+	@GetMapping("/stipendio/{min}&{max}")
+	public List<DipendenteEntity> getClientiByTelefono(@PathVariable("min")Double min, @PathVariable("max")Double max){
+		
+		return dServ.getDipendentiByStipendio(min,max);
+	}
+	
+    @GetMapping("/ruolo/{ruolo}")
+	public List<DipendenteEntity> getDipendente(@PathVariable("ruolo") int ruolo) {
+		
+		return dServ.getDipendentiByRuolo(ruolo);
+	}
+	
     @PostMapping("/addImpiegato")
     public DipendenteEntity addImpiegato(@ModelAttribute DipendenteEntity impiegato , @ModelAttribute UtenteEntity utente ){
         service.addImpiegato(utente, impiegato);
@@ -62,5 +71,4 @@ public class DipendenteREST {
         return   service.editImpiegato(impiegato);
        
     }
-
 }

@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
+
 @Entity
 @Table(name = "ordine")
 public class OrdineEntity {
@@ -34,9 +35,8 @@ public class OrdineEntity {
 	private String consegna;
 
 	@ManyToOne
-	@JoinColumn(name = "utente_id")
-	private UtenteEntity utente;
-
+	@JoinColumn(name = "cliente_id")
+	private ClienteEntity cliente;
 
 	@OneToMany(mappedBy ="ordine")
 	private List<DettaglioEntity> dettagli;
@@ -72,18 +72,18 @@ public class OrdineEntity {
 	public void setDettagli(List<DettaglioEntity> dettagli) {
 		this.dettagli = dettagli;
 	}
-	public UtenteEntity getUtente() {
-		return utente;
+	public ClienteEntity getCliente() {
+		return cliente;
 	}
 
-	public void setUtente(UtenteEntity utente) {
-		this.utente = utente;
+	public void setCliente(ClienteEntity cliente) {
+		this.cliente = cliente;
 	}
 
 	@Override
 	public String toString() {
-		return "OrdineEntity [consegna=" + consegna + ", data=" + data + ", dettagli=" + dettagli + ", dipendente="
-				+ dipendente + ", id=" + id + ", utente=" + utente + "]";
+		return "OrdineEntity [id=" + id + ", dipendente=" + dipendente + ", data=" + data + ", consegna=" + consegna
+				+ "]";
 	}
-	
+
 }
