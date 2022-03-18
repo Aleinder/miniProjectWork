@@ -20,6 +20,7 @@ public class DipendenteEntity {
 
     private int rif_to;
     private double stipendio;
+    private String settore;
 
     @OneToOne(mappedBy = "utente")
 	@JoinColumn(name ="id")

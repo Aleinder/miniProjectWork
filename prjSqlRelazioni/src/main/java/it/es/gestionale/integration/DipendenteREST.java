@@ -37,9 +37,9 @@ public class DipendenteREST {
         return service.getImpiegatiByCognome();
     }
 
-    @GetMapping("/ruolo")
-    public List<DipendenteEntity> getImpiegatiByRuolo(){
-        return service.getImpiegatiByRuolo();
+    @GetMapping("/settore")
+    public List<DipendenteEntity> getImpiegatiBySettore(){
+        return service.getImpiegatiBySettore();
     }
 
     @GetMapping("/stipendio/range/{min}/{max}")
