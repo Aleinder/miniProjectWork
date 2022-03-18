@@ -1,0 +1,116 @@
+    <div th:replace="header.html"></div>
+
+  <!--Titolo-->
+  <div style="text-align: center;">
+    <img src="https://images.cooltext.com/5586845.png" alt="Lista Editori">
+  </div>  
+
+
+  <!--Contenitore della TABELLA-->
+  <div style="background-color: white; margin-left: 20%; margin-right: 20%;">
+
+    <table class="table table-bordered" id="tabellaclienti" th:if="${clienti} != null">
+      <thead>
+        <tr>
+          <th scope="col">NOME</th> 
+          <th scope="col">COGNOME</th>
+          <th scope="col">TELEFONO</th>
+          <th scope="col">EMAIL</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr th:each="cliente : ${clienti}">
+            <td th:text="${cliente.nome}"></td>
+            <td th:text="${cliente.cognome}"></td>
+            <td th:text="${cliente.telefono}"></td>
+            <td th:number="${cliente.email}"></td>
+            <!-- Bottoni Tabella-->
+            <td><div>
+            <!--Bottone "modifica"-->
+            <button th:onclick="'openForm('+${cliente.id}+')'" style="display: inline;" type="button" class="btn btn-primary">Modifica</button>
+            <!-- Popup "Modifica"-->
+            <div class="form-popup" id="myForm">
+            <form id="formAddEdit" action="/lista-editori/modify-cliente" method="post" class="form-container">
+              <!--Titolo popup-->
+            <div>
+            <h1 id="titleAdd">Modifica</h1>
+            </div>
+        
+           
+            <input id="idInput" type="hidden" name="id">
+        
+           
+            <label for="nome"><b>Nome</b></label></br>
+            <input id="nomeInput" type="text" placeholder="Nome cliente" name="nome">
+        
+             
+            <label for="cognome"><b>Cognome</b></label></br>
+            <input id="cognomeInput" type="text" placeholder="Cognome cliente" name="cognome">
+
+            <label for="telefono"><b>Telefono</b></label></br>
+            <input id="telefonoInput" type="text" placeholder="telefono cliente" name="telefono">
+
+
+            <label for="email"><b>Email</b></label></br>
+            <input id="emailInput" type="email" placeholder="email cliente" name="email">
+
+        
+              <!--Bottoni popup-->
+            <input id="editButton" type="submit" value="Aggiungi" class="btn">
+            <button type="button" class="btn cancel" onclick="closeForm()">Chiudi</button>
+        
+            </form>
+            </div>
+           
+          
+            </div></td>
+
+          </tr>
+       </tbody>
+    </table>
+  </div>
+
+  <!-- Bottone "Aggiungi"-->
+  <div style="float:right; margin-right: 20%;">
+    <button type="button" class="btn btn-success" onclick="openForm2()">Aggiungi</button>
+
+    <!-- Popup "Aggiungi"-->
+    <div class="form-popup" id="myForm2">
+    <form id="formAddEdit" action="/lista-editori/add-editore" method="post" class="form-container">
+      <!--Titolo popup-->
+    <div>
+    <h1 id="titleAdd">Aggiungi</h1>
+    </div>
+
+      <!--ID editore (hidden)-->
+    <input id="idInput" type="hidden" name="id">
+
+            <label for="nome"><b>Nome</b></label></br>
+            <input id="nomeInput" type="text" placeholder="Nome cliente" name="nome">
+        
+             
+            <label for="cognome"><b>Cognome</b></label></br>
+            <input id="cognomeInput" type="text" placeholder="Cognome cliente" name="cognome">
+
+            <label for="telefono"><b>Telefono</b></label></br>
+            <input id="telefonoInput" type="text" placeholder="telefono cliente" name="telefono">
+
+
+            <label for="email"><b>Email</b></label></br>
+            <input id="emailInput" type="number" placeholder="email cliente" name="email">
+
+      <!--Bottoni popup-->
+    <input id="editButton" type="submit" value="Aggiungi" class="btn">
+    <button type="button" class="btn cancel" onclick="closeForm2()">Chiudi</button>
+
+    </form>
+
+    </div>
+  </div>
+
+    <p>abbellire l'esito!!!</p>
+    <div id="esito" th:text="${esito}"></div>
+
+  
+  </body>
+</html>
