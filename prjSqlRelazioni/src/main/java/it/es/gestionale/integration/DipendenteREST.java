@@ -38,7 +38,7 @@ public class DipendenteREST {
     }
 
     @GetMapping("/stipendio/range/{min}/{max}")
-    public List<DipendenteEntity> getImpiegatiByStipendio(@PathVariable double min,@PathVariable double max){
+    public List<DipendenteEntity> getImpiegatiByStipendio(@PathVariable("min") double min,@PathVariable("max") double max){
         return service.getDipendentiByStipendio(min,max);
     }
 
