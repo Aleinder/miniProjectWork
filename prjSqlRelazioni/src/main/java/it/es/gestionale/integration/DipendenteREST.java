@@ -29,7 +29,7 @@ public class DipendenteREST {
         return service.getImpiegatiByCognome();
     }
 
-    @GetMapping("/ruolo")
+    @GetMapping("/settore")
     public List<DipendenteEntity> getImpiegatiBySettore(){
         return service.getImpiegatiBySettore();
     }
