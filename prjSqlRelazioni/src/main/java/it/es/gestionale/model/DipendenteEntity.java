@@ -19,8 +19,9 @@ public class DipendenteEntity {
     private String nome;
     private String cognome;
 
-    private int rif_to;
-    private double stipendio;
+    private Integer rif_to;
+    private Double stipendio;
+    private String settore;
 
     @OneToOne
 	@JoinColumn(name ="utente_id",referencedColumnName = "id")
@@ -93,7 +94,7 @@ public class DipendenteEntity {
     @Override
     public String toString() {
         return "DipendenteEntity [cognome=" + cognome + ", id=" + id + ", nome=" + nome + ", rif_to=" + rif_to
-                + ", stipendio=" + stipendio + ", ufficio_id=" + ufficio + ", utente_id=" + utente + "]";
+                + ", stipendio=" + stipendio + "]";
     }
 
   
