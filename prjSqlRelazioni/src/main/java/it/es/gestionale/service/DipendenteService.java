@@ -20,6 +20,10 @@ public class DipendenteService {
 
     DipendenteEntity dipente;
 
+    public List<DipendenteEntity> getDipendenti(){
+        return dipDB.findAll();
+    }
+
     public List<DipendenteEntity> getDipendentiByNome(){
         if(dipente.getUtente().getRuolo().equals("supervisore")){
             return dipDB.findAllByOrderByNome();

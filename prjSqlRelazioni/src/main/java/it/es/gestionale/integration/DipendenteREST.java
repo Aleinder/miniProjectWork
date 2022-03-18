@@ -25,6 +25,11 @@ public class DipendenteREST {
     @Autowired
     DipendenteService service;
 
+    @GetMapping
+    public List<DipendenteEntity> getImpiegati(){
+        return service.getDipendenti();
+    }
+
     @GetMapping("/nome")
     public List<DipendenteEntity> getImpiegatiByNome(){
         return service.getDipendentiByNome();
