@@ -30,8 +30,8 @@ public class DipendenteREST {
     }
 
     @GetMapping("/ruolo")
-    public List<DipendenteEntity> getImpiegatiByRuolo(){
-        return service.getImpiegatiByRuolo();
+    public List<DipendenteEntity> getImpiegatiBySettore(){
+        return service.getImpiegatiBySettore();
     }
 
     @GetMapping("/stipendio/range/{min}/{max}")

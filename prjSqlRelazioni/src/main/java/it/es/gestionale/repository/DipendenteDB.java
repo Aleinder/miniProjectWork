@@ -15,7 +15,7 @@ public interface DipendenteDB extends JpaRepository<DipendenteEntity, Integer>{
 
     public List<DipendenteEntity> findImpiegatoByCognome();
 
-    public List<DipendenteEntity> findImpiegatoByRuolo();
+    public List<DipendenteEntity> findImpiegatoBySettore();
 
     public List<DipendenteEntity> findImpiegatoByStipendioBetween(double min,double max);
 

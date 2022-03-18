@@ -32,9 +32,9 @@ public class DipendenteService {
         return null;
     }
 
-    public List<DipendenteEntity> getImpiegatiByRuolo(){
+    public List<DipendenteEntity> getImpiegatiBySettore(){
         if(dipente.getUtente_id().getRuolo().equals("supervisore")){
-            return dipDB.findImpiegatoByRuolo();
+            return dipDB.findImpiegatoBySettore();
         }
         
 
