@@ -43,7 +43,7 @@ public class DipendenteService {
 
     public List<DipendenteEntity> getDipendentiByStipendio(double min,double max){
         if(dipente.getUtente().getRuolo().equals("supervisore")){
-            return dipDB.findByStipendioBetween(min,max);
+            return dipDB.findImpiegatoByStipendioBetween(min,max);
         }
         
 

@@ -60,7 +60,7 @@ public class DipendenteREST {
 	
     @PostMapping("/addImpiegato")
     public DipendenteEntity addImpiegato(@ModelAttribute DipendenteEntity impiegato , @ModelAttribute UtenteEntity utente ){
-        service.addImpiegato(utente, impiegato);
+        dServ.addImpiegato(utente, impiegato);
         return impiegato;
     }
 
@@ -68,7 +68,7 @@ public class DipendenteREST {
     @PostMapping("/editImpiegato")
     public DipendenteEntity editImpiegato(@ModelAttribute DipendenteEntity impiegato){
 
-        return   service.editImpiegato(impiegato);
+        return   dServ.editImpiegato(impiegato);
        
     }
 }
