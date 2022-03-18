@@ -11,12 +11,12 @@ import it.es.gestionale.model.DipendenteEntity;
 @Repository
 public interface DipendenteDB extends JpaRepository<DipendenteEntity, Integer>{
 	
-    public List<DipendenteEntity> findByNome();
+    public List<DipendenteEntity> findImpiegatoByNome();
 
-    public List<DipendenteEntity> findByCognome();
+    public List<DipendenteEntity> findImpiegatoByCognome();
 
-    public List<DipendenteEntity> findByRuolo();
+    public List<DipendenteEntity> findImpiegatoByRuolo();
 
-    public List<DipendenteEntity> findByStipendioBetween(double min,double max);
+    public List<DipendenteEntity> findImpiegatoByStipendioBetween(double min,double max);
 
 }
