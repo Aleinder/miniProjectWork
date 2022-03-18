@@ -6,13 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.es.gestionale.model.DipendenteEntity;
+import it.es.gestionale.model.UtenteEntity;
 import it.es.gestionale.repository.DipendenteDB;
+import it.es.gestionale.repository.UtenteDB;
 
 @Service
 public class DipendenteService {
     
     @Autowired
     DipendenteDB dipDB;
+
+    @Autowired
+    UtenteDB uDB;
 
     DipendenteEntity dipente;
 
@@ -48,5 +53,22 @@ public class DipendenteService {
         
 
         return null;
+    }
+
+    public DipendenteEntity addImpiegato(UtenteEntity utente , DipendenteEntity impiegato){
+        if(dipente.getUtente_id().getRuolo().equals("supervisore")){
+            uDB.save(utente);
+          return dipDB.save(impiegato);
+        }
+        return null;
+            
+    }
+
+    public DipendenteEntity editImpiegato(DipendenteEntity impiegato){
+        if(dipente.getUtente_id().getRuolo().equals("supervisore")){
+          return dipDB.save(impiegato);
+        }
+        return null;
+            
     }
 }
