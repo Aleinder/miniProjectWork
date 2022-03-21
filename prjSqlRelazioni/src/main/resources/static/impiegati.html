@@ -38,8 +38,8 @@
 
     <div style="display: none;" id="ciao">
       <label>Inserire intervallo di Stipendio</label>
-      <input type="number" id="stipMin"/>
-      <input type="number" id="stipMax"/>
+      <input type="number" id="stipMin" />
+      <input type="number" id="stipMax" />
       <button onclick="asyncSceltaStipendio()" class="btn btn-secondary">Trova</button>
     </div>
 
@@ -53,52 +53,55 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form>
-                <div class="mb-3">
-                  <label for="id" class="form-label ">Nome</label>
-                  <input type="number" class="form-control clienteForm" id="idCliente" aria-describedby="emailHelp" readonly>
-                </div>
-                <div class="mb-3">
-                  <label for="nome" class="form-label ">Nome</label>
-                  <input type="text" class="form-control clienteForm" id="nomeCliente" aria-describedby="emailHelp">
-                </div>
-                <div class="mb-3">
-                  <label for="cognome" class="form-label">Cognome</label>
-                  <input type="text" class="form-control clienteForm" id="cognomeCliente" aria-describedby="emailHelp">
-                </div>
-                <div class="mb-3">
-                  <label for="indirizzo" class="form-label">Indirizzo</label>
-                  <input type="text" class="form-control clienteForm" id="indirizzoCliente" aria-describedby="emailHelp">
-                </div>
-                <div class="mb-3">
-                  <label for="telefono" class="form-label">Telefono</label>
-                  <input type="text" class="form-control clienteForm" id="telefonoCliente" aria-describedby="emailHelp">
-                </div>
-                <div class="mb-3">
-                  <label for="regione" class="form-label">Regione</label>
-                  <input type="text" class="form-control clienteForm" id="regioneCliente" aria-describedby="emailHelp">
-                </div>
-                <div class="mb-3">
-                  <label for="provincia" class="form-label">Provincia</label>
-                  <input type="text" class="form-control clienteForm" id="provinciaCliente" aria-describedby="emailHelp" maxlength="2">
-                </div>
-                <div class="mb-3">
-                  <label for="citta" class="form-label">Citta'</label>
-                  <input type="text" class="form-control clienteForm" id="cittaCliente" aria-describedby="emailHelp">
-                </div>
-                <div class="mb-3">
-                  <input type="text" class="form-control clienteForm" id="utenteCliente" aria-describedby="emailHelp" hidden>
-                </div>
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control clienteForm" id="emailUtente" aria-describedby="emailHelp">
-                </div>
-                <div class="mb-3">
-                  <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control clienteForm" id="passwordUtente" aria-describedby="emailHelp">
-                </div>
+          <form>
+            <div class="mb-3">
+              <label for="id" class="form-label ">Nome</label>
+              <input type="number" class="form-control clienteForm" id="idCliente" aria-describedby="emailHelp"
+                readonly>
+            </div>
+            <div class="mb-3">
+              <label for="nome" class="form-label ">Nome</label>
+              <input type="text" class="form-control clienteForm" id="nomeCliente" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="cognome" class="form-label">Cognome</label>
+              <input type="text" class="form-control clienteForm" id="cognomeCliente" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="indirizzo" class="form-label">Indirizzo</label>
+              <input type="text" class="form-control clienteForm" id="indirizzoCliente" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="telefono" class="form-label">Telefono</label>
+              <input type="text" class="form-control clienteForm" id="telefonoCliente" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="regione" class="form-label">Regione</label>
+              <input type="text" class="form-control clienteForm" id="regioneCliente" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="provincia" class="form-label">Provincia</label>
+              <input type="text" class="form-control clienteForm" id="provinciaCliente" aria-describedby="emailHelp"
+                maxlength="2">
+            </div>
+            <div class="mb-3">
+              <label for="citta" class="form-label">Citta'</label>
+              <input type="text" class="form-control clienteForm" id="cittaCliente" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <input type="text" class="form-control clienteForm" id="utenteCliente" aria-describedby="emailHelp"
+                hidden>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control clienteForm" id="emailUtente" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control clienteForm" id="passwordUtente" aria-describedby="emailHelp">
+            </div>
 
-              </form>
+          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -113,16 +116,26 @@
 
     asyncReturn();
 
-    function asd()
-    {
-        document.getElementById("ciao").style.display="block";
+    function asd() {
+      document.getElementById("ciao").style.display = "block";
     }
 
     async function loadArt() {
       let response = await fetch('http://localhost:8080/api/dipendente');
       let art = await response.json();
-    
+
       return art;
+    }
+
+    function chiamaModale(event) {
+
+      svuotaModale();
+      modal.show();
+      createButton.classList.remove("nascondi");
+      updateButton.classList.add("nascondi");
+      document.getElementById("emailUtente").removeAttribute("readonly");
+
+
     }
 
     async function loadArt1() {
@@ -260,88 +273,88 @@
     }
 
 
-    function createCliente(event){
-			
+    function createCliente(event) {
+
       fetch(url, {
         method: 'POST',
         headers: {
-            "Content-type": "application/json; charset=UTF-8"
+          "Content-type": "application/json; charset=UTF-8"
         },
         body: JSON.stringify({
-          
-            nome: document.getElementById("nomeCliente").value,
-            cognome: document.getElementById("cognomeCliente").value,
-            indirizzo: document.getElementById("indirizzoCliente").value,
-            telefono: document.getElementById("telefonoCliente").value,
-            regione: document.getElementById("regioneCliente").value,
-            provincia: document.getElementById("provinciaCliente").value,
-            citta: document.getElementById("cittaCliente").value,
-        utente:{
+
+          nome: document.getElementById("nomeCliente").value,
+          cognome: document.getElementById("cognomeCliente").value,
+          indirizzo: document.getElementById("indirizzoCliente").value,
+          telefono: document.getElementById("telefonoCliente").value,
+          regione: document.getElementById("regioneCliente").value,
+          provincia: document.getElementById("provinciaCliente").value,
+          citta: document.getElementById("cittaCliente").value,
+          utente: {
             email: document.getElementById("emailUtente").value,
             password: document.getElementById("passwordUtente").value,
             ruolo: "cliente"
-        }
-        
-        
+          }
+
+
         }),
-      
+
       })
-    
-      .then(function(response){
-    
-        modal.hide();
-        listaClienti();
-        return response.json();
-      })
-      .catch((error) => {
-        
-        console.error('Error:', error);
-      });
-      
+
+        .then(function (response) {
+
+          modal.hide();
+          listaClienti();
+          return response.json();
+        })
+        .catch((error) => {
+
+          console.error('Error:', error);
+        });
+
       agganciaEventi();
     }
-    
-    function editInsertCliente(event){
-    
-      
+
+    function editInsertCliente(event) {
+
+
       let originator = event.currentTarget;
       let idCliente = originator.getAttribute('cliente-id');
       createButton.classList.add("nascondi");
       updateButton.classList.remove("nascondi");
       document.getElementById("emailUtente").setAttribute("readonly", "");
-    
-    
+
+
       console.log(idCliente);
-    
-      fetch(url+idCliente)
-        .then(function(response){
+
+      fetch(url + idCliente)
+        .then(function (response) {
           return response.json();
         })
-        .then(function(json){
+        .then(function (json) {
           console.log(json);
-            
-          document.getElementById("idCliente").value = json.id; 
-          document.getElementById("nomeCliente").value = json.nome; 
-          document.getElementById("cognomeCliente").value = json.cognome; 
-          document.getElementById("indirizzoCliente").value = json.indirizzo; 
-          document.getElementById("telefonoCliente").value = json.telefono; 
-          document.getElementById("regioneCliente").value = json.regione; 
-          document.getElementById("provinciaCliente").value = json.provincia; 
+
+          document.getElementById("idCliente").value = json.id;
+          document.getElementById("nomeCliente").value = json.nome;
+          document.getElementById("cognomeCliente").value = json.cognome;
+          document.getElementById("indirizzoCliente").value = json.indirizzo;
+          document.getElementById("telefonoCliente").value = json.telefono;
+          document.getElementById("regioneCliente").value = json.regione;
+          document.getElementById("provinciaCliente").value = json.provincia;
           document.getElementById("cittaCliente").value = json.citta;
-          document.getElementById("utenteCliente").value = json.utente.id; 
+          document.getElementById("utenteCliente").value = json.utente.id;
           document.getElementById("emailUtente").value = json.utente.email;
           document.getElementById("passwordUtente").value = json.utente.password;
-          
-    
-          })
-        .catch(function(err) { 
+
+
+        })
+        .catch(function (err) {
           alert(err);
           console.log('Failed to fetch page: ', err);
         })
-    
-        agganciaEventi();
-        
-        
+
+      agganciaEventi();
+
+
     }
 
 
