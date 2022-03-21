@@ -3,6 +3,8 @@ package it.es.gestionale.integration;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,64 +30,64 @@ public class DipendenteREST {
     DipendenteService service;
 
     @GetMapping
-    public List<DipendenteEntity> getImpiegati(UtenteEntity utente){
+    public ResponseEntity<List<DipendenteEntity>> getImpiegati(UtenteEntity utente){
         if (utente.getRuolo().equals("supervisore")){
-            return service.getDipendenti();
+            return ResponseEntity.ok(service.getDipendenti());
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
     @GetMapping("/nome")
-    public List<DipendenteEntity> getImpiegatiByNome(UtenteEntity utente){
+    public ResponseEntity<List<DipendenteEntity>> getImpiegatiByNome(UtenteEntity utente){
         if (utente.getRuolo().equals("supervisore")){
-            return service.getDipendentiByNome(utente);
+            return ResponseEntity.ok(service.getDipendentiByNome(utente));
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
     @GetMapping("/cognome")
-    public List<DipendenteEntity> getImpiegatiByCognome(UtenteEntity utente){
+    public ResponseEntity<List<DipendenteEntity>> getImpiegatiByCognome(UtenteEntity utente){
         if (utente.getRuolo().equals("supervisore")){
-            return service.getDipendentiByCognome(utente);
+            return  ResponseEntity.ok(service.getDipendentiByCognome(utente));
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
     @GetMapping("/settore")
-    public List<DipendenteEntity> getImpiegatiBySettore(UtenteEntity utente){
+    public ResponseEntity<List<DipendenteEntity>> getImpiegatiBySettore(UtenteEntity utente){
         if (utente.getRuolo().equals("supervisore")){
-            return service.getDipendentiBySettore(utente);
+            return ResponseEntity.ok(service.getDipendentiBySettore(utente));
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
     @GetMapping("/stipendio/range/{min}/{max}")
-    public List<DipendenteEntity> getImpiegatiByStipendio(@PathVariable double min,@PathVariable double max,UtenteEntity utente){
+    public ResponseEntity<List<DipendenteEntity>> getImpiegatiByStipendio(@PathVariable double min,@PathVariable double max,UtenteEntity utente){
         if (utente.getRuolo().equals("supervisore")){
-            return service.getDipendentiByStipendio(min,max,utente);
+            return ResponseEntity.ok(service.getDipendentiByStipendio(min,max,utente));
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
 
 	
     @PostMapping("/addImpiegato")
-    public DipendenteEntity addImpiegato(@ModelAttribute DipendenteEntity impiegato , @ModelAttribute UtenteEntity utente ){
+    public ResponseEntity<DipendenteEntity> addImpiegato(@ModelAttribute DipendenteEntity impiegato , @ModelAttribute UtenteEntity utente ){
         if (utente.getRuolo().equals("supervisore")){
             service.addImpiegato(utente, impiegato);
-            return impiegato;
+            return ResponseEntity.ok(impiegato);
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
 
     @PostMapping("/editImpiegato")
-    public DipendenteEntity editImpiegato(@ModelAttribute DipendenteEntity impiegato,UtenteEntity utente){
+    public ResponseEntity<DipendenteEntity> editImpiegato(@ModelAttribute DipendenteEntity impiegato,UtenteEntity utente){
 
         if (utente.getRuolo().equals("supervisore")){
-            return   service.editImpiegato(impiegato,utente);
+            return   ResponseEntity.ok(service.editImpiegato(impiegato,utente));
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
 
