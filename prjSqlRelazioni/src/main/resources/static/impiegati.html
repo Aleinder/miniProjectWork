@@ -21,23 +21,77 @@
           <th scope="col">Cognome</th>
           <th scope="col">riferimento</th>
           <th scope="col">Stipendio</th>
-          <th scope="col">Settore</th>
+          <th scope="col">Ruolo</th>
         </tr>
       </thead>
       <tbody id="righeTabella">
       </tbody>
     </table>
+
+
+    <div class="text-center mb-5">
+      <button id="Filtra" class="btn btn-secondary" onclick="asyncSceltaNome1()">Filtra Nome</button>
+      <button id="Filtra" class="btn btn-secondary" onclick="asyncSceltaCognome()">Filtra Cognome</button>
+      <button id="Filtra" class="btn btn-secondary" onclick="asyncSceltaRuolo()">Filtra Ruolo</button>
+      <button id="Filtra" class="btn btn-secondary" onclick="asd()">Filtra Stipendio</button>
+    </div>
+
+    <div style="display: none;" id="ciao">
+      <label>Inserire intervallo di Stipendio</label>
+      <input type="number" id="stipMin"/>
+      <input type="number" id="stipMax"/>
+      <button onclick="asyncSceltaStipendio()" class="btn btn-secondary">Trova</button>
+    </div>
+
   </div>
 
   <script>
 
     asyncReturn();
 
-    async function loadArt() {
+    function asd()
+    {
+        document.getElementById("ciao").style.display="block";
+    }
 
+    async function loadArt() {
       let response = await fetch('http://localhost:8080/api/dipendente');
       let art = await response.json();
+    
       return art;
+    }
+
+    async function loadArt1() {
+      let response1 = await fetch('http://localhost:8080/api/dipendente/nome');
+      let art1 = await response1.json();
+
+      return art1;
+    }
+
+    async function loadArt2() {
+      let response2 = await fetch('http://localhost:8080/api/dipendente/cognome');
+      let art1 = await response2.json();
+
+      return art1;
+    }
+
+    async function loadArt3() {
+      let response3 = await fetch('http://localhost:8080/api/dipendente/settore');
+      let art1 = await response3.json();
+
+      return art1;
+    }
+
+    async function loadArt4() {
+
+      let stipMin = document.getElementById('stipMin').value;
+      let stipMax = document.getElementById('stipMax').value;
+
+
+      let response4 = await fetch('http://localhost:8080/api/dipendente/stipendio/range/' + stipMin + '/' + stipMax);
+      let art1 = await response4.json();
+
+      return art1;
     }
 
     async function asyncReturn() {
@@ -60,6 +114,89 @@
       document.getElementById("righeTabella").innerHTML = output;
 
     }
+
+    async function asyncSceltaNome1() {
+      const impiegato = await loadArt1();
+      let output = '';
+
+      for (const a of impiegato) {
+
+        output +=
+          '<tr>' +
+          '<td>' + a.id + '</td>' +
+          '<td>' + a.nome + '</td>' +
+          '<td>' + a.cognome + '</td>' +
+          '<td>' + a.rif_to + '</td>' +
+          '<td>' + a.stipendio + '</td>' +
+          '<td>' + a.settore + '</td>' +
+          '</tr>';
+      }
+
+      document.getElementById("righeTabella").innerHTML = output;
+    }
+
+    async function asyncSceltaCognome() {
+      const impiegato = await loadArt2();
+      let output = '';
+
+      for (const a of impiegato) {
+
+        output +=
+          '<tr>' +
+          '<td>' + a.id + '</td>' +
+          '<td>' + a.nome + '</td>' +
+          '<td>' + a.cognome + '</td>' +
+          '<td>' + a.rif_to + '</td>' +
+          '<td>' + a.stipendio + '</td>' +
+          '<td>' + a.settore + '</td>' +
+          '</tr>';
+      }
+
+      document.getElementById("righeTabella").innerHTML = output;
+    }
+
+    async function asyncSceltaRuolo() {
+      const impiegato = await loadArt3();
+      let output = '';
+
+      for (const a of impiegato) {
+
+        output +=
+          '<tr>' +
+          '<td>' + a.id + '</td>' +
+          '<td>' + a.nome + '</td>' +
+          '<td>' + a.cognome + '</td>' +
+          '<td>' + a.rif_to + '</td>' +
+          '<td>' + a.stipendio + '</td>' +
+          '<td>' + a.settore + '</td>' +
+          '</tr>';
+      }
+
+      document.getElementById("righeTabella").innerHTML = output;
+    }
+
+    async function asyncSceltaStipendio() {
+      const impiegato = await loadArt4();
+      let output = '';
+
+      for (const a of impiegato) {
+
+        output +=
+          '<tr>' +
+          '<td>' + a.id + '</td>' +
+          '<td>' + a.nome + '</td>' +
+          '<td>' + a.cognome + '</td>' +
+          '<td>' + a.rif_to + '</td>' +
+          '<td>' + a.stipendio + '</td>' +
+          '<td>' + a.settore + '</td>' +
+          '</tr>';
+      }
+
+      document.getElementById("righeTabella").innerHTML = output;
+    }
+
+
+
 
   </script>
 
