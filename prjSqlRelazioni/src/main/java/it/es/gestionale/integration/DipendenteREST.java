@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/dipendente")
-@SessionAttributes("utente")
+@SessionAttributes("utenteSession")
 public class DipendenteREST {
    
     @Autowired

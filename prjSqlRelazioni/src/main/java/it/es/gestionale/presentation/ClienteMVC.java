@@ -20,7 +20,7 @@ import it.es.gestionale.service.UtenteService;
 
 @Controller
 @RequestMapping("cliente")
-@SessionAttributes("utente")
+@SessionAttributes("utenteSession")
 public class ClienteMVC {
 
     @Autowired

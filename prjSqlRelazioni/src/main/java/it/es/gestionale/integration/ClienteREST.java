@@ -23,7 +23,7 @@ import it.es.gestionale.service.ClienteService;
 
 @RestController
 @RequestMapping("/api/cliente")
-@SessionAttributes("utente")
+@SessionAttributes("utenteSession")
 public class ClienteREST {
 	
 	@Autowired

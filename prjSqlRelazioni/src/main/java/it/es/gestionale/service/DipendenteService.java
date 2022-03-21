@@ -54,7 +54,7 @@ public class DipendenteService {
             return dipDB.findAllByOrderBySettore();
         }
         return null;
-    }*/
+    }
 
 
     public List<DipendenteEntity> getDipendentiByStipendio(double min,double max,UtenteEntity ut){

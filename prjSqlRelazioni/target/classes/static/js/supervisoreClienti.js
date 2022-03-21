@@ -263,8 +263,4 @@ window.addEventListener(
 	
 	listaClienti(null);
     
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> main
