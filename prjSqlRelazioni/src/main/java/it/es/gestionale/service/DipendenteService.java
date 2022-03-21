@@ -24,6 +24,10 @@ public class DipendenteService {
 
     DipendenteEntity dipendente;
 
+    public DipendenteEntity getDipendente(int id, UtenteEntity ut){
+        return dipDB.findDipendenteById(id);
+    }
+
     public List<DipendenteEntity> getDipendenti(){
         return dipDB.findAll();
     }

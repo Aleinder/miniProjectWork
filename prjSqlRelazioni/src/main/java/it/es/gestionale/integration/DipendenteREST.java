@@ -90,5 +90,13 @@ public class DipendenteREST {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
+    @GetMapping("/impiegato/{id}")
+    public ResponseEntity<DipendenteEntity> getImpiegato(@PathVariable int id,UtenteEntity utente){
+        if (utente.getRuolo().equals("supervisore")){
+            return   ResponseEntity.ok(service.getDipendente(id,utente));
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    }
+
 
 }

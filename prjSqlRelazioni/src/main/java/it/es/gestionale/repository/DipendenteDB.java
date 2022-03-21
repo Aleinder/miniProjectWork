@@ -19,4 +19,6 @@ public interface DipendenteDB extends JpaRepository<DipendenteEntity, Integer>{
 
     public List<DipendenteEntity> findByStipendioBetween(double min,double max);
 
+    public DipendenteEntity findDipendenteById(int id);
+
 }

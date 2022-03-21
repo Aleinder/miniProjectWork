@@ -14,7 +14,7 @@
 
   <div class="container">
     
-    <button id="mostraModaleCreate" type="button" class="btn btn-primary">
+    <button id="call_modale" type="button" class="btn btn-primary">
       Create Cliente
     </button>
 
@@ -133,14 +133,9 @@
     }
 
     function chiamaModale(event) {
-
-      svuotaModale();
-      modal.show();
-      createButton.classList.remove("nascondi");
-      updateButton.classList.add("nascondi");
-      document.getElementById("emailUtente").removeAttribute("readonly");
-
-
+    event.stopPropagation();
+    svuotaModale();
+    modal.show();
     }
 
     async function loadArt1() {
@@ -190,6 +185,7 @@
           '<td>' + a.rif_to + '</td>' +
           '<td>' + a.stipendio + '</td>' +
           '<td>' + a.settore + '</td>' +
+          '<td>' + '<button type="button" class="editButton" impiegato-id='+a.id+' >edit</button>'+'</td>'
           '</tr>';
       }
 
@@ -278,7 +274,7 @@
     }
 
 
-    function createCliente(event) {
+    function createDipendente(event) {
 
       fetch(url, {
         method: 'POST',
@@ -287,17 +283,17 @@
         },
         body: JSON.stringify({
 
-          nome: document.getElementById("nomeCliente").value,
-          cognome: document.getElementById("cognomeCliente").value,
-          indirizzo: document.getElementById("indirizzoCliente").value,
-          telefono: document.getElementById("telefonoCliente").value,
-          regione: document.getElementById("regioneCliente").value,
-          provincia: document.getElementById("provinciaCliente").value,
-          citta: document.getElementById("cittaCliente").value,
+          nome: document.getElementById("nome").value,
+          cognome: document.getElementById("cognome").value,
+          rif_to: document.getElementById("rif_to").value,
+          settore: document.getElementById("settore").value,
+          stipendio: document.getElementById("stipendio").value,
+          ufficio: document.getElementById("ufficio").value,
+          utente: document.getElementById("utente").value,
           utente: {
             email: document.getElementById("emailUtente").value,
             password: document.getElementById("passwordUtente").value,
-            ruolo: "cliente"
+            ruolo: "impiegato"
           }
 
 
@@ -319,33 +315,29 @@
       agganciaEventi();
     }
 
-    function editInsertCliente(event) {
+    function editInsertImpiegato(event) {
 
 
       let originator = event.currentTarget;
-      let idCliente = originator.getAttribute('cliente-id');
-      createButton.classList.add("nascondi");
-      updateButton.classList.remove("nascondi");
-      document.getElementById("emailUtente").setAttribute("readonly", "");
+      let idImpiegato = originator.getAttribute('impiegato-id');
 
+      console.log(idImpiegato);
 
-      console.log(idCliente);
-
-      fetch(url + idCliente)
+      fetch(url + idImpiegato)
         .then(function (response) {
           return response.json();
         })
         .then(function (json) {
           console.log(json);
 
-          document.getElementById("idCliente").value = json.id;
-          document.getElementById("nomeCliente").value = json.nome;
-          document.getElementById("cognomeCliente").value = json.cognome;
-          document.getElementById("indirizzoCliente").value = json.indirizzo;
-          document.getElementById("telefonoCliente").value = json.telefono;
-          document.getElementById("regioneCliente").value = json.regione;
-          document.getElementById("provinciaCliente").value = json.provincia;
-          document.getElementById("cittaCliente").value = json.citta;
+          document.getElementById("id").value = json.id;
+          document.getElementById("cognome").value = json.cognome;
+          document.getElementById("nome").value = json.nome;
+          document.getElementById("rif_to").value = json.rif_to;
+          document.getElementById("stipendio").value = json.stipendio;
+          document.getElementById("settore").value = json.settore;
+          document.getElementById("ufficio").value = json.ufficio;
+          document.getElementById("utente").value = json.utente;
           document.getElementById("utenteCliente").value = json.utente.id;
           document.getElementById("emailUtente").value = json.utente.email;
           document.getElementById("passwordUtente").value = json.utente.password;
@@ -362,7 +354,24 @@
 
     }
 
+        window.addEventListener('DOMContentLoaded', (event) => {
+    
 
+          
+    let updateButton = document.getElementById("updateButton");
+        updateButton.addEventListener("click", editImpiegato);
+        
+        let call_modale = document.getElementById("call_modale");
+        call_modale.addEventListener("click", chiamaModale);
+
+        let editButton = document.getElementsByClassName("editButton");
+        for (let li = 0; li < editButton.length; li++) {
+            editButton[li].addEventListener("click", editInsertImpiegato);
+        }
+
+
+
+});
 
 
   </script>

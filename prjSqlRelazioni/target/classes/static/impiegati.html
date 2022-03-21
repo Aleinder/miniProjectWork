@@ -13,6 +13,11 @@
 <body>
 
   <div class="container">
+    
+    <button id="call_modale" type="button" class="btn btn-primary">
+      Create Cliente
+    </button>
+
     <table class="table table-dark table-striped">
       <thead>
         <tr>
@@ -31,34 +36,106 @@
 
     <div class="text-center mb-5">
       <button id="Filtra" class="btn btn-secondary" onclick="asyncSceltaNome1()">Filtra Nome</button>
-      <button id="Filtra1" class="btn btn-secondary" onclick="asyncSceltaCognome()">Filtra Cognome</button>
-      <button id="Filtra2" class="btn btn-secondary" onclick="asyncSceltaRuolo()">Filtra Ruolo</button>
-      <button id="Filtra3" class="btn btn-secondary" onclick="asd()">Filtra Stipendio</button>
+      <button id="Filtra" class="btn btn-secondary" onclick="asyncSceltaCognome()">Filtra Cognome</button>
+      <button id="Filtra" class="btn btn-secondary" onclick="asyncSceltaRuolo()">Filtra Ruolo</button>
+      <button id="Filtra" class="btn btn-secondary" onclick="asd()">Filtra Stipendio</button>
     </div>
 
     <div style="display: none;" id="ciao">
       <label>Inserire intervallo di Stipendio</label>
-      <input type="number" id="stipMin"/>
-      <input type="number" id="stipMax"/>
+      <input type="number" id="stipMin" />
+      <input type="number" id="stipMax" />
       <button onclick="asyncSceltaStipendio()" class="btn btn-secondary">Trova</button>
     </div>
 
+  </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="id" class="form-label ">Nome</label>
+              <input type="number" class="form-control clienteForm" id="idCliente" aria-describedby="emailHelp"
+                readonly>
+            </div>
+            <div class="mb-3">
+              <label for="nome" class="form-label ">Nome</label>
+              <input type="text" class="form-control clienteForm" id="nomeCliente" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="cognome" class="form-label">Cognome</label>
+              <input type="text" class="form-control clienteForm" id="cognomeCliente" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="indirizzo" class="form-label">Indirizzo</label>
+              <input type="text" class="form-control clienteForm" id="indirizzoCliente" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="telefono" class="form-label">Telefono</label>
+              <input type="text" class="form-control clienteForm" id="telefonoCliente" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="regione" class="form-label">Regione</label>
+              <input type="text" class="form-control clienteForm" id="regioneCliente" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="provincia" class="form-label">Provincia</label>
+              <input type="text" class="form-control clienteForm" id="provinciaCliente" aria-describedby="emailHelp"
+                maxlength="2">
+            </div>
+            <div class="mb-3">
+              <label for="citta" class="form-label">Citta'</label>
+              <input type="text" class="form-control clienteForm" id="cittaCliente" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <input type="text" class="form-control clienteForm" id="utenteCliente" aria-describedby="emailHelp"
+                hidden>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control clienteForm" id="emailUtente" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control clienteForm" id="passwordUtente" aria-describedby="emailHelp">
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button id="createButton" type="button" class="btn btn-primary">Add</button>
+          <button id="updateButton" type="button" class="btn btn-primary">Update</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
 
     asyncReturn();
 
-    function asd()
-    {
-        document.getElementById("ciao").style.display="block";
+    function asd() {
+      document.getElementById("ciao").style.display = "block";
     }
 
     async function loadArt() {
       let response = await fetch('http://localhost:8080/api/dipendente');
       let art = await response.json();
-    
+
       return art;
+    }
+
+    function chiamaModale(event) {
+    event.stopPropagation();
+    svuotaModale();
+    modal.show();
     }
 
     async function loadArt1() {
@@ -108,6 +185,7 @@
           '<td>' + a.rif_to + '</td>' +
           '<td>' + a.stipendio + '</td>' +
           '<td>' + a.settore + '</td>' +
+          '<td>' + '<button type="button" class="editButton" impiegato-id='+a.id+' >edit</button>'+'</td>'
           '</tr>';
       }
 
@@ -196,6 +274,104 @@
     }
 
 
+    function createDipendente(event) {
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify({
+
+          nome: document.getElementById("nome").value,
+          cognome: document.getElementById("cognome").value,
+          rif_to: document.getElementById("rif_to").value,
+          settore: document.getElementById("settore").value,
+          stipendio: document.getElementById("stipendio").value,
+          ufficio: document.getElementById("ufficio").value,
+          utente: document.getElementById("utente").value,
+          utente: {
+            email: document.getElementById("emailUtente").value,
+            password: document.getElementById("passwordUtente").value,
+            ruolo: "impiegato"
+          }
+
+
+        }),
+
+      })
+
+        .then(function (response) {
+
+          modal.hide();
+          listaClienti();
+          return response.json();
+        })
+        .catch((error) => {
+
+          console.error('Error:', error);
+        });
+
+      agganciaEventi();
+    }
+
+    function editInsertImpiegato(event) {
+
+
+      let originator = event.currentTarget;
+      let idImpiegato = originator.getAttribute('impiegato-id');
+
+      console.log(idImpiegato);
+
+      fetch(url + idImpiegato)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (json) {
+          console.log(json);
+
+          document.getElementById("id").value = json.id;
+          document.getElementById("cognome").value = json.cognome;
+          document.getElementById("nome").value = json.nome;
+          document.getElementById("rif_to").value = json.rif_to;
+          document.getElementById("stipendio").value = json.stipendio;
+          document.getElementById("settore").value = json.settore;
+          document.getElementById("ufficio").value = json.ufficio;
+          document.getElementById("utente").value = json.utente;
+          document.getElementById("utenteCliente").value = json.utente.id;
+          document.getElementById("emailUtente").value = json.utente.email;
+          document.getElementById("passwordUtente").value = json.utente.password;
+
+
+        })
+        .catch(function (err) {
+          alert(err);
+          console.log('Failed to fetch page: ', err);
+        })
+
+      agganciaEventi();
+
+
+    }
+
+        window.addEventListener('DOMContentLoaded', (event) => {
+    
+
+          
+    let updateButton = document.getElementById("updateButton");
+        updateButton.addEventListener("click", editImpiegato);
+        
+        let call_modale = document.getElementById("call_modale");
+        call_modale.addEventListener("click", chiamaModale);
+
+        let editButton = document.getElementsByClassName("editButton");
+        for (let li = 0; li < editButton.length; li++) {
+            editButton[li].addEventListener("click", editInsertImpiegato);
+        }
+
+
+
+});
 
 
   </script>
