@@ -234,7 +234,6 @@ function svuotaModale(){
 	
 
 }
-
 window.addEventListener(
 	'DOMContentLoaded', 
 	function(event){
@@ -264,4 +263,8 @@ window.addEventListener(
 	
 	listaClienti(null);
     
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> main
