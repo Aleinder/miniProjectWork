@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="dipendente")
 public class DipendenteEntity {
@@ -39,6 +41,15 @@ public class DipendenteEntity {
 	public void setUtente_id(UtenteEntity utente) {
 		this.utente = utente;
 	}
+    
+
+    public String getSettore() {
+        return settore;
+    }
+
+    public void setSettore(String settore) {
+        this.settore = settore;
+    }
 
     public int getId() {
         return id;

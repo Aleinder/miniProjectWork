@@ -10,6 +10,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.springframework.context.annotation.Scope;
 
 @Entity
@@ -26,6 +28,7 @@ public class UtenteEntity {
     private String ruolo;
 
     @OneToOne(mappedBy = "utente")
+	@JsonIgnore
 	private DipendenteEntity dipendente;
     
     @OneToOne(mappedBy = "utente")

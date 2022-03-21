@@ -33,7 +33,7 @@ class EsTestCliente {
 		for(UtenteEntity utente : utenti){
 
 			if(utente.getRuolo().equals("supervisore")){
-				System.out.println(db.findAllByOrderBySettore());
+				System.out.println(db.findAll());
 			}else{
 				System.out.println("--------------");
 				System.out.println("no");
